@@ -1,4 +1,5 @@
 import User from "../models/User.model.js";
+import Endereco from "../models/Endereco.model.js";
 import { updateUserShape, getUserShape } from "../schemas/user.schema.js";
 
 import bcrypt from "bcrypt";
@@ -17,6 +18,30 @@ export const getAllUsers = async (req, res) => {
   const usersValidated = await Promise.all(validationPromises);
 
   res.status(200).json(usersValidated);
+};
+
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { userId: req.params.id },
+      attributes: { exclude: ["senha", "createdAt", "updatedAt", "superUser"] },
+      include: [
+        {
+          model: Endereco,
+          as: "enderecos",
+        },
+      ],
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuário não encontrado" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: error });
+  }
 };
 
 export const updateUser = async (req, res) => {
