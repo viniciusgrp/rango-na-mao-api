@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/index.js";
-import Endereco from "./Endereco.model.js";
 
 const User = sequelize.define(
   "User",
