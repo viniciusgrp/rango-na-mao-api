@@ -20,7 +20,7 @@ const Ingrediente = sequelize.define(
     lojaId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    },
+    }
   },
   {
     timestamps: true,
