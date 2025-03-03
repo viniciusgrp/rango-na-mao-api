@@ -7,13 +7,23 @@ import {
   getIngredientes,
   updateIngrediente,
 } from "../controllers/ingrediente.controller.js";
-import { createProdutoSchema } from "../schemas/produto.schema.js";
+import { createIngredienteSchema } from "../schemas/ingrediente.schema.js";
 
 const router = Router();
 
 router.get("/:id", getIngredientes);
-router.post("/", validate(createProdutoSchema), getTokenId, createIngrediente);
-router.patch("/:id", getTokenId, updateIngrediente);
+router.post(
+  "/",
+  validate(createIngredienteSchema),
+  getTokenId,
+  createIngrediente
+);
+router.patch(
+  "/:id",
+  getTokenId,
+  validate(createIngredienteSchema),
+  updateIngrediente
+);
 router.delete("/:id", getTokenId, deleteIngrediente);
 
 export default router;

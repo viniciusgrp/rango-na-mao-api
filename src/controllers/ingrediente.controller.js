@@ -1,4 +1,5 @@
 import Ingrediente from "../models/Ingrediente.model.js";
+import * as uuid from "uuid";
 
 export const getIngredientes = async (req, res) => {
   try {
@@ -14,6 +15,7 @@ export const createIngrediente = async (req, res) => {
   try {
     const lojaId = req.tokenId;
     req.validatedBody.lojaId = lojaId;
+    req.validatedBody.ingredienteId = uuid.v4();
 
     const ingrediente = await Ingrediente.create(req.validatedBody);
 

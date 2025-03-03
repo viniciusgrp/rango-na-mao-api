@@ -5,6 +5,7 @@ export const createProdutoSchema = yup.object().shape({
   descricao: yup.string(),
   preco: yup.number().required("Preço é um campo obrigatório"),
   servePessoas: yup.number(),
+  ingredientes: yup.array(),
   removeIngredientes: yup.boolean(),
   custoProducao: yup.number(),
   valorDesconto: yup.number(),

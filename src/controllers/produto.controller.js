@@ -1,11 +1,21 @@
 import Produto from "../models/Produto.model.js";
 import Ingrediente from "../models/Ingrediente.model.js";
 import IngredienteDoProduto from "../models/IngredienteDoProduto.model.js";
+import { v4 as uuidv4 } from "uuid";
 
 export const getProdutosPorLoja = async (req, res) => {
   try {
     const produtos = await Produto.findAll({
       where: { lojaId: req.params.id },
+      include: [
+        {
+          model: Ingrediente,
+          as: "ingredientes",
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
     res.status(200).json(produtos);
@@ -23,7 +33,8 @@ export const createProduto = async (req, res) => {
 
     const produto = await Produto.create({
       ...produtoData,
-      lojaId
+      produtoId: uuidv4(),
+      lojaId,
     });
 
     const ingredientesPromises = ingredientesData.map(
