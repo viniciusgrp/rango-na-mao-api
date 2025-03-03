@@ -77,10 +77,13 @@ export const updateProduto = async (req, res) => {
   try {
     const lojaId = req.tokenId;
     const produtoId = req.params.id;
-    const ingredientesData = req.validatedBody.ingredientes || [];
+    let ingredientesData = [];
 
-    // Remove 'ingredientes' from the validatedBody
-    const { ingredientes, ...produtoData } = req.validatedBody;
+    if (req.validatedBody?.ingredientes) {
+         ingredientesData = req.body.ingredientes;
+    }
+
+    const { ...produtoData } = req.body;
 
     const produto = await Produto.findOne({
       where: { produtoId: produtoId },

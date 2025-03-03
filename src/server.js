@@ -10,6 +10,7 @@ import Endereco from "./models/Endereco.model.js";
 import Produto from "./models/Produto.model.js";
 import Ingrediente from "./models/Ingrediente.model.js";
 import IngredienteDoProduto from "./models/IngredienteDoProduto.model.js";
+import Categoria from "./models/Categoria.model.js";
 
 User.hasMany(Endereco, {
   foreignKey: "userId",
@@ -51,6 +52,16 @@ Produto.belongsToMany(Ingrediente, {
   through: IngredienteDoProduto,
   foreignKey: "produtoId",
   as: "ingredientes",
+});
+
+Categoria.hasMany(Produto, {
+  foreignKey: "categoriaId",
+  as: "produtos",
+});
+
+Produto.belongsTo(Categoria, {
+  foreignKey: "categoriaId",
+  as: "categoria",
 });
 
 IngredienteDoProduto.belongsTo(Ingrediente, {
