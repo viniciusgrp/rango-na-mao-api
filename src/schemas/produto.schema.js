@@ -11,4 +11,5 @@ export const createProdutoSchema = yup.object().shape({
   valorDesconto: yup.number(),
   foto: yup.string(),
   adicionais: yup.boolean(),
+  categoria: yup.number()
 });

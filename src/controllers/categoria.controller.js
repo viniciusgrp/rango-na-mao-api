@@ -2,7 +2,7 @@ import Categoria from "../models/Categoria.model.js";
 
 export const getCategoriasPorLoja = async (req, res) => {
   try {
-    const lojaId = req.body.tokenId;
+    const lojaId = req.tokenId;
     const categorias = await Categoria.findAll({
       where: { lojaId },
     });
@@ -28,9 +28,11 @@ export const getCategoriasComProdutos = async (req, res) => {
 
 export const criarCategoria = async (req, res) => {
   try {
+    const lojaId = req.tokenId;
+
     const categoria = await Categoria.create({
       ...req.body,
-      lojaId: req.params.id,
+      lojaId
     });
 
     res.status(201).json(categoria);

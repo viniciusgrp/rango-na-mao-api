@@ -11,6 +11,8 @@ import Produto from "./models/Produto.model.js";
 import Ingrediente from "./models/Ingrediente.model.js";
 import IngredienteDoProduto from "./models/IngredienteDoProduto.model.js";
 import Categoria from "./models/Categoria.model.js";
+import Pedido from "./models/Pedido.model.js";
+import ProdutoPedido from "./models/ProdutosDoPedido.model.js";
 
 User.hasMany(Endereco, {
   foreignKey: "userId",
@@ -73,6 +75,29 @@ IngredienteDoProduto.belongsTo(Produto, {
   foreignKey: "produtoId",
   as: "produto",
 });
+
+Pedido.belongsTo(User, {
+  foreignKey: "userId",
+  as: "usuario",
+});
+
+Pedido.belongsTo(User, {
+  foreignKey: "lojaId",
+  as: "loja",
+});
+
+Pedido.belongsToMany(Produto, {
+  through: ProdutoPedido,
+  foreignKey: "pedidoId",
+  as: "produtos",
+});
+
+Produto.belongsToMany(Pedido, {
+    through: ProdutoPedido,
+  foreignKey: "produtoId",
+  as: "pedidos",
+});
+
 
 const server = app.listen(3000);
 

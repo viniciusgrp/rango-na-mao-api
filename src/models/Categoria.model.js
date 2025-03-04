@@ -15,13 +15,14 @@ const Categoria = sequelize.define(
       allowNull: false,
     },
     nome: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     ordem: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      allowNull: false,
+    },
   },
   {
     timestamps: true,
