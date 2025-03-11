@@ -45,16 +45,22 @@ const User = sequelize.define(
       allowNull: false,
     },
     superUser: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-    }
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
   },
   {
     timestamps: true,
   }
 );
 
+User.associate = (models) => {
+  User.hasMany(models.Endereco, {
+    foreignKey: "userId",
+    as: "enderecos",
+  });
+};
 User.sync({ force: false });
 
 export default User;

@@ -16,10 +16,24 @@ export const createUserShape = yup.object().shape({
 export const updateUserShape = yup.object().shape({
   userId: yup.number(),
   nome: yup.string(),
+  senha: yup.string(),
   email: yup.string().email(),
   telefone: yup.string(),
   cpf: yup.string(),
   dataNascimento: yup.date(),
   tipoUsuario: yup.number(),
   validado: yup.boolean(),
+  superUser: yup.boolean(),
+});
+
+export const getUserShape = yup.object().shape({
+  userId: yup.number(),
+  nome: yup.string(),
+  email: yup.string().email(),
+  telefone: yup.string(),
+  cpf: yup.string(),
+  dataNascimento: yup.date(),
+  tipoUsuario: yup.number(),
+  validado: yup.boolean(),
+  superUser: yup.boolean(),
 });
